@@ -11,13 +11,20 @@ class BlockUnknownException(BlockException):
 
 
 class DeviceAddress(IntEnum):
-    """Lists the different device addresses packets can be sent from."""
+    """
+    Enumerates the possible device addresses from which packets can be sent.
+
+    Attributes:
+    GROUND_STATION: Represents the device address for ground stations.
+    ROCKET: Represents the device address for rockets.
+    MULTICAST: Represents the device address for multicast transmissions.
+    """
 
     GROUND_STATION = 0x0
     ROCKET = 0x1
     MULTICAST = 0xF
 
-    def __str__(self):
+    def __str__(self) -> str:
         match self:
             case DeviceAddress.GROUND_STATION:
                 return "GROUND STATION"
@@ -28,7 +35,13 @@ class DeviceAddress(IntEnum):
 
 
 class RadioBlockType(IntEnum):
-    """Lists the different radio block classes."""
+    """
+    Enumeration class for different radio block classes.
+    Attributes:
+    CONTROL: Control radio block class.
+    COMMAND: Command radio block class.
+    DATA: Data radio block class.
+    RESERVED: Reserved radio block class."""
 
     CONTROL = 0x0
     COMMAND = 0x1
@@ -37,7 +50,16 @@ class RadioBlockType(IntEnum):
 
 
 class SDBlockSubtype(IntEnum):
-    """Lists the different SD Block classes."""
+    """
+    Enumeration class for subtypes of SD Blocks.
+
+    Attributes:
+        LOGGING_METADATA: Subtype for logging metadata blocks.
+        TELEMETRY_DATA: Subtype for telemetry data blocks.
+        DIAGNOSTIC_DATA: Subtype for diagnostic data blocks.
+        TELEMETRY_CONTROL: Subtype for telemetry control blocks.
+        TELEMETRY_COMMAND: Subtype for telemetry command blocks.
+        RESERVED: Reserved subtype."""
 
     LOGGING_METADATA = 0x0
     TELEMETRY_DATA = 0x1
@@ -48,7 +70,17 @@ class SDBlockSubtype(IntEnum):
 
 
 class ControlBlockSubtype(IntEnum):
-    """Lists the subtypes of telemetry command blocks."""
+    """
+    Enumeration class for subtypes of telemetry command blocks.
+
+    Attributes:
+        SIGNAL_REPORT: Subtype for signal report command blocks.
+        COMMAND_ACKNOWLEDGEMENT: Subtype for command acknowledgement command blocks.
+        COMMAND_NONCE_REQUEST: Subtype for command nonce request command blocks.
+        COMMAND_NONCE: Subtype for command nonce command blocks.
+        BEACON: Subtype for beacon command blocks.
+        BEACON_RESPONSE: Subtype for beacon response command blocks.
+        RESERVED: Reserved subtype."""
 
     SIGNAL_REPORT = 0x00
     COMMAND_ACKNOWLEDGEMENT = 0x01
@@ -60,7 +92,15 @@ class ControlBlockSubtype(IntEnum):
 
 
 class CommandBlockSubtype(IntEnum):
-    """Lists the subtypes of telemetry control blocks."""
+    """
+    Enumeration class for subtypes of telemetry control blocks.
+
+    Attributes:
+        RESET_ROCKET_AVIONICS: Subtype for resetting rocket avionics control blocks.
+        REQUEST_TELEMETRY_DATA: Subtype for requesting telemetry data control blocks.
+        DEPLOY_PARACHUTE: Subtype for deploying parachute control blocks.
+        TARE_SENSORS: Subtype for taring sensors control blocks.
+        RESERVED: Reserved subtype."""
 
     RESET_ROCKET_AVIONICS = 0x00
     REQUEST_TELEMETRY_DATA = 0x01
@@ -70,7 +110,23 @@ class CommandBlockSubtype(IntEnum):
 
 
 class DataBlockSubtype(IntEnum):
-    """Lists the subtypes of telemetry data blocks."""
+    """
+    Enumeration class for subtypes of telemetry data blocks.
+
+    Attributes:
+        DEBUG_MESSAGE: Subtype for debug message data blocks.
+        STATUS: Subtype for status data blocks.
+        STARTUP_MESSAGE: Subtype for startup message data blocks.
+        ALTITUDE: Subtype for altitude data blocks.
+        ACCELERATION: Subtype for acceleration data blocks.
+        ANGULAR_VELOCITY: Subtype for angular velocity data blocks.
+        GNSS: Subtype for GNSS data blocks.
+        GNSS_META: Subtype for GNSS meta data blocks.
+        POWER: Subtype for power data blocks.
+        TEMPERATURE: Subtype for temperature data blocks.
+        MPU9250_IMU: Subtype for MPU9250 IMU data blocks.
+        KX134_1211_ACCEL: Subtype for KX134-1211 accelerometer data blocks.
+        RESERVED: Reserved subtype."""
 
     DEBUG_MESSAGE = 0x00
     STATUS = 0x01
@@ -88,13 +144,23 @@ class DataBlockSubtype(IntEnum):
 
 
 class LoggingMetadataBlockSubtype(IntEnum):
-    """Lists the subtypes of logging meta blocks."""
+    """
+    Enumeration class for subtypes of logging metadata blocks.
+
+    Attributes:
+        SPACER: Subtype for spacer logging metadata blocks.
+        """
 
     SPACER = 0x0
 
 
 class DiagnosticDataBlockSubtype(IntEnum):
-    """Lists the subtypes of diagnostic blocks."""
+    """Enumeration class for subtypes of diagnostic data blocks.
+
+    Attributes:
+        LOG_MESSAGE: Subtype for log message diagnostic data blocks.
+        OUTGOING_RADIO_PACKET: Subtype for outgoing radio packet diagnostic data blocks.
+        INCOMING_RADIO_PACKET: Subtype for incoming radio packet diagnostic data blocks."""
 
     LOG_MESSAGE = 0x0
     OUTGOING_RADIO_PACKET = 0x1
