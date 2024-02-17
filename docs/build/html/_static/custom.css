@@ -1,0 +1,14 @@
+/* This file intentionally left blank. */
+.sig{
+    border-bottom: 1px solid #9932CC; /* Adjust the color and style as needed */
+    padding-bottom: 5px; /* Adjust the spacing as needed */
+    margin-bottom: 15px; /* Adjust the spacing as needed */
+    padding-top: 5px;
+}
+.simple{
+    padding-bottom :10px;
+}
+.h2 {       /*useless*/
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
