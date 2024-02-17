@@ -1,9 +1,32 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch name to trigger deployment
+  pull_request:
+
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Change to ubuntu-latest for the latest Ubuntu version
+    permissions:
+      contents: write
     steps:
-      - name: Deploy
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          pip install sphinx sphinx_rtd_theme myst_parser groundwork-sphinx-theme
+
+      - name: Build documentation
+        run: |
+          cd docs
+          sphinx-build source build
+
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          publish_dir: docs/build  # Adjust the publish directory to match your Sphinx build output directory
