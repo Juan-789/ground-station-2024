@@ -24,3 +24,14 @@ block.py
 .. autoexception:: modules.telemetry.block.BlockException
 
 .. autoexception:: modules.telemetry.block.BlockUnknownException
+
+control_block.py
+--------------------------
+
+.. autoclass:: modules.telemetry.control_block.ControlDataBlockException
+
+.. autoclass:: modules.telemetry.control_block.ControlBlockUnknownException
+
+.. autoclass:: modules.telemetry.control_block.ControlBlock
+
+.. autoclass:: modules.telemetry.control_block.SignalReportControlBlock
