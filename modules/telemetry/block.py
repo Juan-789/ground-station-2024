@@ -38,10 +38,11 @@ class RadioBlockType(IntEnum):
     """
     Enumeration class for different radio block classes.
     Attributes:
-        - CONTROL: Control radio block class.
-        - COMMAND: Command radio block class.
-        - DATA: Data radio block class.
-        - RESERVED: Reserved radio block class."""
+    - CONTROL: Control radio block class.
+    - COMMAND: Command radio block class.
+    - DATA: Data radio block class.
+    - RESERVED: Reserved radio block class.
+    """
 
     CONTROL = 0x0
     COMMAND = 0x1

@@ -26,10 +26,7 @@ block.py
 .. autoexception:: modules.telemetry.block.BlockUnknownException
 
 control_block.py testcrazyyyyyyy
---------------------------
-
-
-
+----------------------------------------------------------------------
 .. autoexception:: modules.telemetry.control_block.ControlDataBlockException
 
 .. autoexception:: modules.telemetry.control_block.ControlBlockUnknownException

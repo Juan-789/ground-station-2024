@@ -35,7 +35,6 @@ class ControlBlock(ABC):
 
         Args:
             subtype (ControlBlockSubtype): The subtype of the control block.
-        :param subtype:
         """
         super().__init__()
         self.subtype: ControlBlockSubtype = subtype
@@ -104,14 +103,12 @@ class SignalReportControlBlock(ControlBlock):
 
         Returns:
             int: The length of the control block
-        :return:
         """
         return 16
 
     def to_payload(self) -> bytes:
         """
         Marshal the control block to a bytes object.
-        :return:
             bytes: The marshaled control block.
         """
         raise NotImplementedError()
