@@ -13,6 +13,8 @@ Contents
    usage
    api
    telemetry
+   block
+   control_block
    main
    miscelaneous
 
