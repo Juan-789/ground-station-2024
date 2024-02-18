@@ -3,10 +3,12 @@ from enum import IntEnum
 
 
 class BlockException(Exception):
+    """Base class for exceptions related to telemetry blocks"""
     pass
 
 
 class BlockUnknownException(BlockException):
+    """Exception raised when an unknown telemetry block subtype is encountered"""
     pass
 
 
