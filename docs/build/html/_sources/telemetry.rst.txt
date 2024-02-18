@@ -30,9 +30,9 @@ control_block.py test
 
 
 
-.. autoclass:: modules.telemetry.control_block.ControlDataBlockException
+.. autoexception:: modules.telemetry.control_block.ControlDataBlockException
 
-.. autoclass:: modules.telemetry.control_block.ControlBlockUnknownException
+.. autoexception:: modules.telemetry.control_block.ControlBlockUnknownException
 
 .. autoclass:: modules.telemetry.control_block.ControlBlock
 
