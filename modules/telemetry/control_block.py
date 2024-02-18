@@ -10,27 +10,58 @@ logger = logging.getLogger(__name__)
 
 
 class ControlDataBlockException(BlockException):
+    """
+    Exception raised for errors related to control data blocks.
+    """
     pass
 
 
 class ControlBlockUnknownException(BlockUnknownException):
+    """
+    Exception raised when an unknown control block subtype is encountered.
+    """
     pass
 
 
 class ControlBlock(ABC):
-    """Defines the interface for control blocks."""
+    """Abstract base class defining the interface for control blocks.
+
+    Attributes:
+        subtype (ControlBlockSubtype): The subtype of the control block."""
 
     def __init__(self, subtype: ControlBlockSubtype) -> None:
+        """
+        Initialize a ControlBlock instance.
+
+        Args:
+            subtype (ControlBlockSubtype): The subtype of the control block.
+        :param subtype:
+        """
         super().__init__()
         self.subtype: ControlBlockSubtype = subtype
 
     @abstractmethod
     def to_payload(self) -> bytes:
-        """Marshal block to a bytes object."""
+        """Marshal the control block to a bytes object.
+
+        Returns:
+            bytes: The marshaled control block.
+        ."""
 
     @classmethod
     def parse_block(cls, block_subtype: ControlBlockSubtype, payload: bytes) -> ControlBlock:
-        """Unmarshal a bytes object to appropriate block class."""
+        """Unmarshal a bytes object to an appropriate block class.
+
+        Args:
+            block_subtype (ControlBlockSubtype): The subtype of the control block.
+            payload (bytes): The payload containing the control block data.
+
+        Returns:
+            ControlBlock: The parsed control block instance.
+
+        Raises:
+            ControlBlockUnknownException: If the block subtype is unknown.
+        ."""
         match block_subtype:
             case ControlBlockSubtype.SIGNAL_REPORT:
                 logger.debug("Control block of type {block_subtype} received.")
@@ -52,7 +83,14 @@ class ControlBlock(ABC):
 
 
 class SignalReportControlBlock(ControlBlock):
-    """Represents a control block requesting a signal report."""
+    """
+    Represents a control block requesting a signal report.
+
+    Attributes:
+        mission_time (int): The mission time.
+        snr (int): The signal-to-noise ratio.
+        tx_power (int): The transmission power.
+    """
 
     def __init__(self):
         super().__init__(ControlBlockSubtype.SIGNAL_REPORT)
@@ -61,19 +99,52 @@ class SignalReportControlBlock(ControlBlock):
         self.tx_power: int = 0
 
     def __len__(self) -> int:
+        """
+        Get the length of the control block.
+
+        Returns:
+            int: The length of the control block
+        :return:
+        """
         return 16
 
     def to_payload(self) -> bytes:
+        """
+        Marshal the control block to a bytes object.
+        :return:
+            bytes: The marshaled control block.
+        """
         raise NotImplementedError()
 
     @classmethod
     def from_payload(cls, _: bytes) -> Self:
+        """
+        Construct a SignalReportControlBlock instance from a payload.
+
+        Args:
+            _: The payload containing the control block data.
+
+        Returns:
+            SignalReportControlBlock: The constructed control block instance.
+        """
         return cls()
 
     def __str__(self) -> str:
+        """
+        Get a string representation of the control block.
+
+        Returns:
+            str: A string representation of the control block.
+        """
         return f"{self.__class__.__name__} -> time: {self.mission_time}, snr: {self.snr}, power: {self.tx_power}"
 
     def __iter__(self) -> Generator[tuple[str, int], None, None]:
+        """
+        Iterate over the attributes of the control block.
+
+        Yields:
+            tuple[str, int]: A tuple containing the attribute name and value.
+        """
         yield "mission_time", self.mission_time
         yield "snr", self.snr
         yield "power", self.tx_power
