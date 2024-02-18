@@ -5,3 +5,5 @@ API
     :toctree: generated
 
     modules.telemetry.block
+
+    modules.telemetry.control_block
