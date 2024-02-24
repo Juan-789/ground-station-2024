@@ -8,14 +8,14 @@
     <title>control_block.py &#8212; Ground Station Documentation 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="_static/groundwork.css?v=594d7a89" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=58b2f3cf" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="block.py" href="block.html" />
-    <link rel="prev" title="Telemetry Module" href="telemetry.html" /> 
+    <link rel="next" title="main" href="main.html" />
+    <link rel="prev" title="block.py" href="block.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,10 +27,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="block.html" title="block.py"
+          <a href="main.html" title="main"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="telemetry.html" title="Telemetry Module"
+          <a href="block.html" title="block.py"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="telemetry.html" accesskey="U">Telemetry Module</a> &#187;</li>
@@ -45,6 +45,40 @@
             
   <section id="control-block-py">
 <h1>control_block.py<a class="headerlink" href="#control-block-py" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.telemetry.control_block.ControlBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.control_block.</span></span><span class="sig-name descname"><span class="pre">ControlBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="block.html#modules.telemetry.block.ControlBlockSubtype" title="modules.telemetry.block.ControlBlockSubtype"><span class="pre">ControlBlockSubtype</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.control_block.ControlBlock" title="Link to this definition">¶</a></dt>
+<dd><p>Abstract base class defining the interface for control blocks.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>subtype (ControlBlockSubtype): The subtype of the control block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="modules.telemetry.control_block.SignalReportControlBlock">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.control_block.</span></span><span class="sig-name descname"><span class="pre">SignalReportControlBlock</span></span><a class="headerlink" href="#modules.telemetry.control_block.SignalReportControlBlock" title="Link to this definition">¶</a></dt>
+<dd><p>Represents a control block requesting a signal report.</p>
+<dl class="simple">
+<dt>Attributes:</dt><dd><p>mission_time (int): The mission time.
+snr (int): The signal-to-noise ratio.
+tx_power (int): The transmission power.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.telemetry.control_block.ControlDataBlockException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.control_block.</span></span><span class="sig-name descname"><span class="pre">ControlDataBlockException</span></span><a class="headerlink" href="#modules.telemetry.control_block.ControlDataBlockException" title="Link to this definition">¶</a></dt>
+<dd><p>Exception raised for errors related to control data blocks.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="modules.telemetry.control_block.ControlBlockUnknownException">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.control_block.</span></span><span class="sig-name descname"><span class="pre">ControlBlockUnknownException</span></span><a class="headerlink" href="#modules.telemetry.control_block.ControlBlockUnknownException" title="Link to this definition">¶</a></dt>
+<dd><p>Exception raised when an unknown control block subtype is encountered.</p>
+</dd></dl>
+
 </section>
 
 
@@ -55,14 +89,27 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">control_block.py</a><ul>
+<li><a class="reference internal" href="#modules.telemetry.control_block.ControlBlock"><code class="docutils literal notranslate"><span class="pre">ControlBlock</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.control_block.SignalReportControlBlock"><code class="docutils literal notranslate"><span class="pre">SignalReportControlBlock</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.control_block.ControlDataBlockException"><code class="docutils literal notranslate"><span class="pre">ControlDataBlockException</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.control_block.ControlBlockUnknownException"><code class="docutils literal notranslate"><span class="pre">ControlBlockUnknownException</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
     <h4>Previous topic</h4>
-    <p class="topless"><a href="telemetry.html"
-                          title="previous chapter">Telemetry Module</a></p>
+    <p class="topless"><a href="block.html"
+                          title="previous chapter">block.py</a></p>
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="block.html"
-                          title="next chapter">block.py</a></p>
+    <p class="topless"><a href="main.html"
+                          title="next chapter">main</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -95,10 +142,10 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="block.html" title="block.py"
+          <a href="main.html" title="main"
              >next</a> |</li>
         <li class="right" >
-          <a href="telemetry.html" title="Telemetry Module"
+          <a href="block.html" title="block.py"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="telemetry.html" >Telemetry Module</a> &#187;</li>

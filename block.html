@@ -8,14 +8,12 @@
     <title>block.py &#8212; Ground Station Documentation 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="_static/groundwork.css?v=594d7a89" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=58b2f3cf" />
     <script src="_static/documentation_options.js?v=d45e8c67"></script>
     <script src="_static/doctools.js?v=888ff710"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="data_block.py" href="data_block.html" />
-    <link rel="prev" title="control_block.py" href="control_block.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,14 +24,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="data_block.html" title="data_block.py"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="control_block.html" title="control_block.py"
-             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="telemetry.html" accesskey="U">Telemetry Module</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">block.py</a></li> 
       </ul>
     </div>  
@@ -47,7 +38,7 @@
 <h1>block.py<a class="headerlink" href="#block-py" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.DeviceAddress">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DeviceAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DeviceAddress" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DeviceAddress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DeviceAddress" title="Link to this definition">¶</a></dt>
 <dd><p>Enumerates the possible device addresses from which packets can be sent.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -61,7 +52,7 @@
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.RadioBlockType">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">RadioBlockType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.RadioBlockType" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">RadioBlockType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.RadioBlockType" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for different radio block classes.
 Attributes:
 - CONTROL: Control radio block class.
@@ -72,7 +63,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.SDBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">SDBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.SDBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">SDBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.SDBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of SD Blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -89,7 +80,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.ControlBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">ControlBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.ControlBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">ControlBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.ControlBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of telemetry command blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -107,7 +98,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.CommandBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">CommandBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.CommandBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">CommandBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.CommandBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of telemetry control blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -123,7 +114,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.DataBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DataBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DataBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of telemetry data blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -147,7 +138,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.LoggingMetadataBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">LoggingMetadataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.LoggingMetadataBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">LoggingMetadataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.LoggingMetadataBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of logging metadata blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -159,7 +150,7 @@ Attributes:
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.block.DiagnosticDataBlockSubtype">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DiagnosticDataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DiagnosticDataBlockSubtype" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.block.</span></span><span class="sig-name descname"><span class="pre">DiagnosticDataBlockSubtype</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.block.DiagnosticDataBlockSubtype" title="Link to this definition">¶</a></dt>
 <dd><p>Enumeration class for subtypes of diagnostic data blocks.</p>
 <dl class="simple">
 <dt>Attributes:</dt><dd><ul class="simple">
@@ -211,16 +202,6 @@ Attributes:
 </ul>
 
   </div>
-  <div>
-    <h4>Previous topic</h4>
-    <p class="topless"><a href="control_block.html"
-                          title="previous chapter">control_block.py</a></p>
-  </div>
-  <div>
-    <h4>Next topic</h4>
-    <p class="topless"><a href="data_block.html"
-                          title="next chapter">data_block.py</a></p>
-  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -251,14 +232,7 @@ Attributes:
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="data_block.html" title="data_block.py"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="control_block.html" title="control_block.py"
-             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
-          <li class="nav-item nav-item-1"><a href="telemetry.html" >Telemetry Module</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">block.py</a></li> 
       </ul>
     </div>

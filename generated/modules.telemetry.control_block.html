@@ -8,12 +8,14 @@
     <title>modules.telemetry.control_block &#8212; Ground Station Documentation 0.0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=4f649999" />
     <link rel="stylesheet" type="text/css" href="../_static/groundwork.css?v=594d7a89" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=58b2f3cf" />
     <script src="../_static/documentation_options.js?v=d45e8c67"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Telemetry Module" href="../telemetry.html" />
+    <link rel="prev" title="modules.telemetry.block" href="modules.telemetry.block.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,7 +26,14 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../telemetry.html" title="Telemetry Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="modules.telemetry.block.html" title="modules.telemetry.block"
+             accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" accesskey="U">API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">modules.telemetry.control_block</a></li> 
       </ul>
     </div>  
@@ -34,8 +43,30 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="modules-telemetry-control-block">
-<h1>modules.telemetry.control_block<a class="headerlink" href="#modules-telemetry-control-block" title="Link to this heading">¶</a></h1>
+  <section id="module-modules.telemetry.control_block">
+<span id="modules-telemetry-control-block"></span><h1>modules.telemetry.control_block<a class="headerlink" href="#module-modules.telemetry.control_block" title="Link to this heading">¶</a></h1>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../telemetry.html#modules.telemetry.control_block.ControlBlock" title="modules.telemetry.control_block.ControlBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ControlBlock</span></code></a>(subtype)</p></td>
+<td><p>Abstract base class defining the interface for control blocks.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../telemetry.html#modules.telemetry.control_block.SignalReportControlBlock" title="modules.telemetry.control_block.SignalReportControlBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SignalReportControlBlock</span></code></a>()</p></td>
+<td><p>Represents a control block requesting a signal report.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Exceptions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="../telemetry.html#modules.telemetry.control_block.ControlBlockUnknownException" title="modules.telemetry.control_block.ControlBlockUnknownException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ControlBlockUnknownException</span></code></a></p></td>
+<td><p>Exception raised when an unknown control block subtype is encountered.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="../telemetry.html#modules.telemetry.control_block.ControlDataBlockException" title="modules.telemetry.control_block.ControlDataBlockException"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ControlDataBlockException</span></code></a></p></td>
+<td><p>Exception raised for errors related to control data blocks.</p></td>
+</tr>
+</tbody>
+</table>
 </section>
 
 
@@ -45,6 +76,16 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="modules.telemetry.block.html"
+                          title="previous chapter">modules.telemetry.block</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../telemetry.html"
+                          title="next chapter">Telemetry Module</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -75,7 +116,14 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="../telemetry.html" title="Telemetry Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="modules.telemetry.block.html" title="modules.telemetry.block"
+             >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Ground Station Documentation 0.0.1 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../api.html" >API</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">modules.telemetry.control_block</a></li> 
       </ul>
     </div>
