@@ -14,7 +14,7 @@ Contents
    api
    telemetry
    block
-   .. include:: control_block.rst
+   control_block.rst
    main
    miscelaneous
 
