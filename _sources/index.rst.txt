@@ -13,8 +13,6 @@ Contents
    usage
    api
    telemetry
-   block
-   control_block.rst
    main
    miscelaneous
 
