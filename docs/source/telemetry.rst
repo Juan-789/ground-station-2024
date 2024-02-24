@@ -6,8 +6,9 @@ Contents
 --------
 
 .. toctree::
-    block.rst
     control_block.rst
+    block.rst
+
 
 Indices and tables
 ==================
