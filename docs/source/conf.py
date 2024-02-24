@@ -17,7 +17,7 @@ release = '0.0.1'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['sphinx.ext.doctest', 'sphinx.ext.autodoc', 'sphinx.ext.autosummary']
-
+source_dir = "docs/source"
 templates_path = ['_templates']
 exclude_patterns = []
 
