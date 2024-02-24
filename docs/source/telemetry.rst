@@ -8,6 +8,7 @@ Contents
 .. toctree::
     control_block.rst
     block.rst
+    data_block.rst
 
 
 Indices and tables
