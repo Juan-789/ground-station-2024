@@ -29,4 +29,4 @@ jobs:
         if: github.ref == 'refs/heads/main'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/build  # Adjust the publish directory to match your Sphinx build output directory
+          publish_dir: docs/build/html  # Adjust the publish directory to match your Sphinx build output directory
