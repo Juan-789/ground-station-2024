@@ -15,6 +15,10 @@ from modules.misc import converter
 
 
 class DataBlockException(BlockException):
+    """
+    Base exception class for telemetry data block errors.
+    args: BlockException - :class:`~telemetry.block.BlockException`
+    """
     pass
 
 
