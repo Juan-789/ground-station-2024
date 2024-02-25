@@ -48,30 +48,151 @@
 <dl class="py exception">
 <dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlockException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.data_block.</span></span><span class="sig-name descname"><span class="pre">DataBlockException</span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlockException" title="Link to this definition">¶</a></dt>
-<dd><p>Base exception class for telemetry data block errors.
-args: BlockException - <code class="xref py py-class docutils literal notranslate"><span class="pre">BlockException</span></code></p>
+<dd><p>Base exception class for telemetry data block errors.</p>
 </dd></dl>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlockUnknownException">
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.data_block.</span></span><span class="sig-name descname"><span class="pre">DataBlockUnknownException</span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlockUnknownException" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Exception raised for unknown telemetry data block types.</p>
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.data_block.</span></span><span class="sig-name descname"><span class="pre">DataBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="block.html#modules.telemetry.block.DataBlockSubtype" title="modules.telemetry.block.DataBlockSubtype"><span class="pre">DataBlockSubtype</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mission_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.DataBlock" title="Link to this definition">¶</a></dt>
 <dd><p>Interface for all telemetry data blocks.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlock.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlock.__len__" title="Link to this definition">¶</a></dt>
+<dd><p>Returns the length of the datablock, not including the header.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlock.from_payload">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#modules.telemetry.data_block.DataBlock" title="modules.telemetry.data_block.DataBlock"><span class="pre">DataBlock</span></a></span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlock.from_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a DataBlock initialized from a payload of bytes.
+:param payload: The payload bytes representing the data block.
+:type payload: bytes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlock.parse">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block_subtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="block.html#modules.telemetry.block.DataBlockSubtype" title="modules.telemetry.block.DataBlockSubtype"><span class="pre">DataBlockSubtype</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#modules.telemetry.data_block.DataBlock" title="modules.telemetry.data_block.DataBlock"><span class="pre">DataBlock</span></a></span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlock.parse" title="Link to this definition">¶</a></dt>
+<dd><p>Unmarshal a bytes object to appropriate block class.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>block_subtype</strong> (<em>DataBlockSubtype.</em>) – The subtype of the data block.</p></li>
+<li><p><strong>payload</strong> (<em>bytes</em>) – The payload bytes representing the data block/</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#modules.telemetry.data_block.DataBlockUnknownException" title="modules.telemetry.data_block.DataBlockUnknownException"><strong>DataBlockUnknownException</strong></a> – If the block subtype is unknown.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DataBlock.to_payload">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">to_payload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.DataBlock.to_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Marshal block to a bytes object.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.data_block.</span></span><span class="sig-name descname"><span class="pre">DebugMessageDataBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mission_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Telemetry data block for debug messages.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock.__iter__" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over the attributes f the debug message datablock.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock.__len__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the length of the debug message data block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock.__str__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A string representation of the debug message data block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock.from_payload">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock.from_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Desearialize a bytes object to initialize a debug message data block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – The payload bytes representing the debug message data block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.DebugMessageDataBlock.to_payload">
+<span class="sig-name descname"><span class="pre">to_payload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.DebugMessageDataBlock.to_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize the debug message data block to a bytes object</p>
+</dd></dl>
+
+</dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">modules.telemetry.data_block.</span></span><span class="sig-name descname"><span class="pre">StartupMessageDataBlock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mission_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startup_msg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Telemetry data block for startup messages.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock.__iter__" title="Link to this definition">¶</a></dt>
+<dd><p>Iterate over the attributes of the startup message data block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock.__len__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The length of the startup message data block</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock.__str__">
+<span class="sig-name descname"><span class="pre">__str__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock.__str__" title="Link to this definition">¶</a></dt>
+<dd><p>Return a string representation of the startup message data block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock.from_payload">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bytes</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock.from_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Deserialize a bytes object to initialize a startup message data block.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>payload</strong> (<em>bytes</em>) – The payload bytes representing the startup message data block.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="modules.telemetry.data_block.StartupMessageDataBlock.to_payload">
+<span class="sig-name descname"><span class="pre">to_payload</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bytes</span></span></span><a class="headerlink" href="#modules.telemetry.data_block.StartupMessageDataBlock.to_payload" title="Link to this definition">¶</a></dt>
+<dd><p>Serialize the startup message data block to a bytes object.</p>
+</dd></dl>
+
+</dd></dl>
 
 </section>
 
@@ -88,9 +209,29 @@ args: BlockException - <code class="xref py py-class docutils literal notranslat
 <li><a class="reference internal" href="#">data_block.py</a><ul>
 <li><a class="reference internal" href="#modules.telemetry.data_block.DataBlockException"><code class="docutils literal notranslate"><span class="pre">DataBlockException</span></code></a></li>
 <li><a class="reference internal" href="#modules.telemetry.data_block.DataBlockUnknownException"><code class="docutils literal notranslate"><span class="pre">DataBlockUnknownException</span></code></a></li>
-<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock"><code class="docutils literal notranslate"><span class="pre">DataBlock</span></code></a></li>
-<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock</span></code></a></li>
-<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock"><code class="docutils literal notranslate"><span class="pre">DataBlock</span></code></a><ul>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock.__len__"><code class="docutils literal notranslate"><span class="pre">DataBlock.__len__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock.from_payload"><code class="docutils literal notranslate"><span class="pre">DataBlock.from_payload()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock.parse"><code class="docutils literal notranslate"><span class="pre">DataBlock.parse()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DataBlock.to_payload"><code class="docutils literal notranslate"><span class="pre">DataBlock.to_payload()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock</span></code></a><ul>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock.__iter__"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock.__iter__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock.__len__"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock.__len__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock.__str__"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock.__str__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock.from_payload"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock.from_payload()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.DebugMessageDataBlock.to_payload"><code class="docutils literal notranslate"><span class="pre">DebugMessageDataBlock.to_payload()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock</span></code></a><ul>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock.__iter__"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock.__iter__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock.__len__"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock.__len__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock.__str__"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock.__str__()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock.from_payload"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock.from_payload()</span></code></a></li>
+<li><a class="reference internal" href="#modules.telemetry.data_block.StartupMessageDataBlock.to_payload"><code class="docutils literal notranslate"><span class="pre">StartupMessageDataBlock.to_payload()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
