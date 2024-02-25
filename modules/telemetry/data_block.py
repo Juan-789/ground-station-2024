@@ -17,12 +17,14 @@ from modules.misc import converter
 class DataBlockException(BlockException):
     """
     Base exception class for telemetry data block errors.
-    args: BlockException - :class:`~telemetry.block.BlockException`
     """
     pass
 
 
 class DataBlockUnknownException(BlockUnknownException):
+    """
+    Exception raised for unknown telemetry data block types.
+    """
     pass
 
 
@@ -30,6 +32,13 @@ class DataBlock(ABC):
     """Interface for all telemetry data blocks."""
 
     def __init__(self, subtype: DataBlockSubtype, mission_time: int):
+        """
+        Initialize a telemetry data block
+        :param subtype: The subtype of the data block.
+        :type subtype: DataBlockSubtype
+        :param mission_time: The misiion time associated with the data block.
+        :type mission_time: int
+        """
         super().__init__()
         self.mission_time: int = mission_time
         self.subtype: DataBlockSubtype = subtype
@@ -45,11 +54,24 @@ class DataBlock(ABC):
     @classmethod
     @abstractmethod
     def from_payload(cls, payload: bytes) -> DataBlock:
-        """Returns a DataBlock initialized from a payload of bytes."""
+        """
+        Returns a DataBlock initialized from a payload of bytes.
+        :param payload: The payload bytes representing the data block.
+        :type payload: bytes
+        """
 
     @staticmethod
     def parse(block_subtype: DataBlockSubtype, payload: bytes) -> DataBlock:
-        """Unmarshal a bytes object to appropriate block class."""
+        """
+        Unmarshal a bytes object to appropriate block class.
+
+        :param block_subtype: The subtype of the data block.
+        :type block_subtype: DataBlockSubtype.
+        :param payload: The payload bytes representing the data block/
+        :type payload: bytes
+
+        :raises DataBlockUnknownException: If the block subtype is unknown.
+        """
 
         SUBTYPE_CLASSES: dict[DataBlockSubtype, Type[DataBlock]] = {
             DataBlockSubtype.DEBUG_MESSAGE: DebugMessageDataBlock,
@@ -74,59 +96,121 @@ class DataBlock(ABC):
 
 # Debug Message
 class DebugMessageDataBlock(DataBlock):
+    """
+    Telemetry data block for debug messages.
+    """
     def __init__(self, mission_time: int, debug_msg: str):
+        """
+        Initialize a debug message data block.
+
+        :param mission_time: The mission time associated with the debug message.
+        :type mission_time: int
+        :param debug_msg: The debug message content
+        :type debug_msg: str
+        """
         super().__init__(DataBlockSubtype.DEBUG_MESSAGE, mission_time)
         self.debug_msg: str = debug_msg
 
     def __len__(self) -> int:
+        """
+        :return: the length of the debug message data block.
+        """
         return ((len(self.debug_msg.encode("utf-8")) + 3) & ~0x3) + 4
 
     @classmethod
     def from_payload(cls, payload: bytes) -> Self:
+        """
+        Desearialize a bytes object to initialize a debug message data block.
+
+        :param payload: The payload bytes representing the debug message data block.
+        :type payload: bytes
+        """
         mission_time = struct.unpack("<I", payload[0:4])[0]
         return cls(mission_time, payload[4:].decode("utf-8"))
 
     def to_payload(self) -> bytes:
+        """
+        Serialize the debug message data block to a bytes object
+        """
         b = self.debug_msg.encode("utf-8")
         b = b + (b"\x00" * (((len(b) + 3) & ~0x3) - len(b)))
         return struct.pack("<I", self.mission_time) + b
 
     def __str__(self):
+        """
+
+        :return: A string representation of the debug message data block.
+        """
         return f'{self.__class__.__name__} -> time: {self.mission_time} ms, message: "{self.debug_msg}"'
 
     def __iter__(self):
+        """
+        Iterate over the attributes f the debug message datablock.
+        """
         yield "mission_time", self.mission_time
         yield "message", self.debug_msg
 
 
 class StartupMessageDataBlock(DataBlock):
+    """
+    Telemetry data block for startup messages.
+    """
     def __init__(self, mission_time: int, startup_msg: str):
+        """
+        Initialize a startup message data block.
+
+        :param mission_time: The mission time associated with the startup message.
+        :type mission_time: int
+        :param startup_msg:  The startup message content.
+        :type startup_msg: str
+        """
         super().__init__(DataBlockSubtype.STARTUP_MESSAGE, mission_time)
         self.startup_msg: str = startup_msg
 
     def __len__(self) -> int:
+        """
+        :return: The length of the startup message data block
+        """
         return ((len(self.startup_msg.encode("utf-8")) + 3) & ~0x3) + 4
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+               Deserialize a bytes object to initialize a startup message data block.
+
+               :param payload: The payload bytes representing the startup message data block.
+               :type payload: bytes
+               """
         mission_time = struct.unpack("<I", payload[0:4])[0]
         return StartupMessageDataBlock(mission_time, payload[4:].decode("utf-8"))
 
     def to_payload(self) -> bytes:
+        """
+        Serialize the startup message data block to a bytes object.
+        """
         b = self.startup_msg.encode("utf-8")
         b = b + (b"\x00" * (((len(b) + 3) & ~0x3) - len(b)))
         return struct.pack("<I", self.mission_time) + b
 
     def __str__(self):
+        """
+        Return a string representation of the startup message data block.
+        """
         return f'{self.__class__.__name__} -> time: {self.mission_time} ms, message: "{self.startup_msg}"'
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the startup message data block.
+        """
         yield "mission_time", self.mission_time
         yield "message", self.startup_msg
 
 
 # Software Status
 class SensorStatus(IntEnum):
+    """
+    Enumeration for sensor status values.
+    """
     SENSOR_STATUS_NONE = 0x0
     SENSOR_STATUS_INITIALIZING = 0x1
     SENSOR_STATUS_RUNNING = 0x2
@@ -134,6 +218,9 @@ class SensorStatus(IntEnum):
     SENSOR_STATUS_FAILED = 0x4
 
     def __str__(self):
+        """
+        Return a human-readable string representation of the sensor status.
+        """
         return {
             SensorStatus.SENSOR_STATUS_NONE: "none",
             SensorStatus.SENSOR_STATUS_INITIALIZING: "initializing",
@@ -144,12 +231,18 @@ class SensorStatus(IntEnum):
 
 
 class SDCardStatus(IntEnum):
+    """
+    Enumeration for SD card status values.
+    """
     SD_CARD_STATUS_NOT_PRESENT = 0x0
     SD_CARD_STATUS_INITIALIZING = 0x1
     SD_CARD_STATUS_READY = 0x2
     SD_CARD_STATUS_FAILED = 0x3
 
     def __str__(self):
+        """
+        :return: A human-readable string representation of the SD card status.
+        """
         return {
             SDCardStatus.SD_CARD_STATUS_NOT_PRESENT: "card not present",
             SDCardStatus.SD_CARD_STATUS_INITIALIZING: "initializing",
