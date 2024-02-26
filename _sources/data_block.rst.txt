@@ -12,3 +12,7 @@ data_block.py
     :members: __str__
 .. autoclass::modules.telemetry.data_block.SDCardStatus
     :members: __str__
+.. autoclass::modules.telemetry.data_block.DeploymentState
+    :members: __str__
+.. autoclass::modules.telemetry.data_block.StatusDataBlock
+    :members: __init__, __len__, from_payload, to_payload, __str__, __iter__
