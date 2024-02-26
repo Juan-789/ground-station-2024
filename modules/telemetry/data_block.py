@@ -428,9 +428,31 @@ class StatusDataBlock(DataBlock):
 
 # Altitude
 class AltitudeDataBlock(DataBlock):
-    """Contains the data pertaining to the altitude block."""
+    """Contains data pertaining to the altitude block.
+
+         :param mission_time: The mission time in milliseconds.
+        :type mission_time: int
+        :param pressure: The atmospheric pressure in Pascals.
+        :type pressure: int
+        :param temperature: The temperature in Celsius.
+        :type temperature: int
+        :param altitude: The altitude in meters.
+        :type altitude: int
+    """
 
     def __init__(self, mission_time: int, pressure: int, temperature: int, altitude: int):
+        """
+        Initialize an AltitudeDataBlock instance.
+
+        :param mission_time: The mission time in milliseconds.
+        :type mission_time: int
+        :param pressure: The atmospheric pressure in Pascals.
+        :type pressure: int
+        :param temperature: The temperature in Celsius.
+        :type temperature: int
+        :param altitude: The altitude in meters.
+        :type altitude: int
+        """
         super().__init__(DataBlockSubtype.ALTITUDE, mission_time)
         self.pressure: int = pressure
         self.temperature: int = temperature
@@ -441,21 +463,47 @@ class AltitudeDataBlock(DataBlock):
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+        Construct an AltitudeDataBlock instance from a payload.
+
+        :param payload: The payload containing the control block data.
+        :type payload: bytes
+        :return: The constructed AltitudeDataBlock instance.
+        :rtype: AltitudeDataBlock
+        """
         parts = struct.unpack("<Iiii", payload)
         return AltitudeDataBlock(parts[0], parts[1], parts[2] / 1000, parts[3] / 1000)
 
     def to_payload(self) -> bytes:
+        """
+        Marshal the altitude data block to a bytes object.
+
+        :return: The marshaled altitude data block.
+        :rtype: bytes
+        """
         return struct.pack(
             "<Iiii", self.mission_time, int(self.pressure), int(self.temperature * 1000), int(self.altitude * 1000)
         )
 
     def __str__(self):
+        """
+        Get a string representation of the altitude data block.
+
+        :return: A string representation of the altitude data block.
+        :rtype: str
+        """
         return (
             f"{self.__class__.__name__} -> time: {self.mission_time} ms, pressure: {self.pressure} Pa, "
             f"temperature: {self.temperature} C, altitude: {self.altitude} m"
         )
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the altitude data block.
+
+        :return: An iterator over attribute name and value tuples.
+        :rtype: Iterator[tuple[str, Any]]
+        """
         yield "mission_time", self.mission_time
         yield "pressure", {"pascals": self.pressure, "psi": converter.pascals_to_psi(self.pressure)}
         yield "altitude", {"metres": self.altitude, "feet": converter.metres_to_feet(self.altitude)}
@@ -466,7 +514,35 @@ class AltitudeDataBlock(DataBlock):
 
 
 class AccelerationDataBlock(DataBlock):
+    """
+    Contains data pertaining to the acceleration block.
+
+    :param mission_time: The mission time in milliseconds.
+    :type mission_time: int
+    :param fsr: The full-scale range of the accelerometer.
+    :type fsr: int
+    :param x: The acceleration along the x-axis in g.
+    :type x: int
+    :param y: The acceleration along the y-axis in g.
+    :type y: int
+    :param z: The acceleration along the z-axis in g.
+    :type z: int
+    """
     def __init__(self, mission_time: int, fsr: int, x: int, y: int, z: int):
+        """
+        Initialize an AccelerationDataBlock instance.
+
+        :param mission_time: The mission time in milliseconds.
+        :type mission_time: int
+        :param fsr: The full-scale range of the accelerometer.
+        :type fsr: int
+        :param x: The acceleration along the x-axis in g.
+        :type x: int
+        :param y: The acceleration along the y-axis in g.
+        :type y: int
+        :param z: The acceleration along the z-axis in g.
+        :type z: int
+        """
         super().__init__(DataBlockSubtype.ACCELERATION, mission_time)
         self.mission_time: int = mission_time
         self.fsr: int = fsr
@@ -479,6 +555,14 @@ class AccelerationDataBlock(DataBlock):
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+        Construct an AccelerationDataBlock instance from a payload.
+
+        :param payload: The payload containing the control block data.
+        :type payload: bytes
+        :return: The constructed AccelerationDataBlock instance.
+        :rtype: AccelerationDataBlock
+        """
         parts = struct.unpack("<IBBhhh", payload)
         fsr = parts[1]
         x = parts[3] * (fsr / (2**15))
@@ -487,18 +571,36 @@ class AccelerationDataBlock(DataBlock):
         return AccelerationDataBlock(parts[0], fsr, x, y, z)
 
     def to_payload(self) -> bytes:
+        """
+        :Marshal the acceleration data block to a bytes object.
+
+        :return: The marshaled acceleration data block.
+        :rtype: bytes
+        """
         x = round(self.x * ((2**15) / self.fsr))
         y = round(self.y * ((2**15) / self.fsr))
         z = round(self.z * ((2**15) / self.fsr))
         return struct.pack("<IBBhhh", self.mission_time, self.fsr, 0, x, y, z)
 
     def __str__(self):
+        """
+        Get a string representation of the acceleration data block.
+
+        :return: A string representation of the acceleration data block.
+        :rtype: str
+        """
         return (
             f"{self.__class__.__name__} -> time: {self.mission_time}, fsr: {self.fsr}, "
             f"x: {self.x} g, y: {self.y} g, z: {self.z} g"
         )
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the acceleration data block.
+
+        :return: An iterator over attribute name and value tuples.
+        :rtype: Iterator[tuple[str, Any]]
+        """
         yield "mission_time", self.mission_time
         yield "fsr", self.fsr
         yield "x", self.x
@@ -508,7 +610,35 @@ class AccelerationDataBlock(DataBlock):
 
 # Angular Velocity
 class AngularVelocityDataBlock(DataBlock):
+    """
+    Contains data pertaining to the angular velocity block.
+
+    :param mission_time: The mission time in milliseconds.
+    :type mission_time: int
+    :param fsr: The full-scale range of the gyroscope.
+    :type fsr: int
+    :param x: The angular velocity around the x-axis in degrees per second.
+    :type x: int
+    :param y: The angular velocity around the y-axis in degrees per second.
+    :type y: int
+    :param z: The angular velocity around the z-axis in degrees per second.
+    :type z: int
+    """
     def __init__(self, mission_time: int, fsr: int, x: int, y: int, z: int):
+        """
+        Initialize an AngularVelocityDataBlock instance.
+
+        :param mission_time: The mission time in milliseconds.
+        :type mission_time: int
+        :param fsr: The full-scale range of the gyroscope.
+        :type fsr: int
+        :param x: The angular velocity around the x-axis in degrees per second.
+        :type x: int
+        :param y: The angular velocity around the y-axis in degrees per second.
+        :type y: int
+        :param z: The angular velocity around the z-axis in degrees per second.
+        :type z: int
+        """
         super().__init__(DataBlockSubtype.ANGULAR_VELOCITY, mission_time)
         self.fsr: int = fsr
         self.x: int = x
@@ -520,6 +650,14 @@ class AngularVelocityDataBlock(DataBlock):
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+        Construct an AngularVelocityDataBlock instance from a payload.
+
+        :param payload: The payload containing the control block data.
+        :type payload: bytes
+        :return: The constructed AngularVelocityDataBlock instance.
+        :rtype: AngularVelocityDataBlock
+        """
         parts = struct.unpack("<IHhhh", payload)
         fsr = parts[1]
         x = parts[2] * (fsr / (2**15))
@@ -528,18 +666,36 @@ class AngularVelocityDataBlock(DataBlock):
         return AngularVelocityDataBlock(parts[0], fsr, x, y, z)
 
     def to_payload(self) -> bytes:
+        """
+        Marshal the angular velocity data block to a bytes object.
+
+        :return: The marshaled angular velocity data block.
+        :rtype: bytes
+        """
         x = round(self.x * ((2**15) / self.fsr))
         y = round(self.y * ((2**15) / self.fsr))
         z = round(self.z * ((2**15) / self.fsr))
         return struct.pack("<IHhhh", self.mission_time, self.fsr, x, y, z)
 
     def __str__(self):
+        """
+        Get a string representation of the angular velocity data block.
+
+        :return: A string representation of the angular velocity data block.
+        :rtype: str
+        """
         return (
             f"{self.__class__.__name__} -> time: {self.mission_time}, fsr: {self.fsr}, "
             f"x: {self.x} g, y: {self.y} g, z: {self.z} g"
         )
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the angular velocity data block.
+
+        :return: An iterator over attribute name and value tuples.
+        :rtype: Iterator[tuple[str, Any]]
+        """
         yield "mission_time", self.mission_time
         yield "fsr", self.fsr
         yield "x", self.x
@@ -549,6 +705,14 @@ class AngularVelocityDataBlock(DataBlock):
 
 # GNSS Location
 class GNSSLocationFixType(IntEnum):
+    """
+    Enumeration for GNSS location fix types.
+
+    :cvar UNKNOWN: Unknown fix type.
+    :cvar NOT_AVAILABLE: Fix not available.
+    :cvar FIX_2D: 2D fix.
+    :cvar FIX_3D: 3D fix.
+    """
     UNKNOWN = 0
     NOT_AVAILABLE = 1
     FIX_2D = 2
@@ -556,7 +720,34 @@ class GNSSLocationFixType(IntEnum):
 
 
 class GNSSLocationBlock(DataBlock):
-    """The data for GNSS location."""
+    """
+    The data for GNSS location.
+
+    :param mission_time: The mission time in milliseconds.
+    :type mission_time: int
+    :param latitude: The latitude in microdegrees (degrees * 10^6).
+    :type latitude: int
+    :param longitude: The longitude in microdegrees (degrees * 10^6).
+    :type longitude: int
+    :param utc_time: The Coordinated Universal Time (UTC) time in seconds.
+    :type utc_time: int
+    :param altitude: The altitude in meters.
+    :type altitude: int
+    :param speed: The speed over ground in knots.
+    :type speed: int
+    :param course: The course over ground in degrees.
+    :type course: int
+    :param pdop: The Position Dilution of Precision (PDOP).
+    :type pdop: int
+    :param hdop: The Horizontal Dilution of Precision (HDOP).
+    :type hdop: int
+    :param vdop: The Vertical Dilution of Precision (VDOP).
+    :type vdop: int
+    :param sats: The number of satellites in use.
+    :type sats: int
+    :param fix_type: The GNSS location fix type.
+    :type fix_type: GNSSLocationFixType
+    """
 
     def __init__(
         self,
@@ -573,6 +764,36 @@ class GNSSLocationBlock(DataBlock):
         sats: int,
         fix_type: GNSSLocationFixType,
     ):
+        """
+
+        Initialize a GNSSLocationBlock instance.
+
+        :param mission_time: The mission time in milliseconds.
+        :type mission_time: int
+        :param latitude: The latitude in microdegrees (degrees * 10^6).
+        :type latitude: int
+        :param longitude: The longitude in microdegrees (degrees * 10^6).
+        :type longitude: int
+        :param utc_time: The Coordinated Universal Time (UTC) time in seconds.
+        :type utc_time: int
+        :param altitude: The altitude in meters.
+        :type altitude: int
+        :param speed: The speed over ground in knots.
+        :type speed: int
+        :param course: The course over ground in degrees.
+        :type course: int
+        :param pdop: The Position Dilution of Precision (PDOP).
+        :type pdop: int
+        :param hdop: The Horizontal Dilution of Precision (HDOP).
+        :type hdop: int
+        :param vdop: The Vertical Dilution of Precision (VDOP).
+        :type vdop: int
+        :param sats: The number of satellites in use.
+        :type sats: int
+        :param fix_type: The GNSS location fix type.
+        :type fix_type: GNSSLocationFixType
+        """
+        #if not in docs add __init__ to .rst
         super().__init__(DataBlockSubtype.GNSS, mission_time)
         self.latitude: int = latitude
         self.longitude: int = longitude
@@ -591,6 +812,15 @@ class GNSSLocationBlock(DataBlock):
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+        Construct a GNSSLocationBlock instance from a payload.
+
+        :param payload: The payload containing the control block data.
+        :type payload: bytes
+        :return: The constructed GNSSLocationBlock instance.
+        :rtype: GNSSLocationBlock
+        :raises DataBlockException: If an invalid GNSS fix type is encountered.
+        """
         parts = struct.unpack("<IiiIihhHHHBB", payload)
 
         try:
@@ -614,6 +844,12 @@ class GNSSLocationBlock(DataBlock):
         )
 
     def to_payload(self) -> bytes:
+        """
+        Marshal the GNSS location block to a bytes object.
+
+        :return: The marshaled GNSS location block.
+        :rtype: bytes
+        """
         return struct.pack(
             "<IiiIihhHHHBB",
             self.mission_time,
@@ -632,6 +868,16 @@ class GNSSLocationBlock(DataBlock):
 
     @staticmethod
     def coord_to_str(coord: int, ew: bool = False):
+        """
+        Convert a coordinate in microdegrees to a string representation.
+
+        :param coord: The coordinate in microdegrees.
+        :type coord: int
+        :param ew: Whether it's an east-west coordinate.
+        :type ew: bool, optional
+        :return: The string representation of the coordinate.
+        :rtype: str
+        """
         direction = coord >= 0
         coord = abs(coord)
         degrees = coord // 600000
@@ -648,6 +894,12 @@ class GNSSLocationBlock(DataBlock):
         return f"{degrees}°{minutes}'{seconds:.3f}{direction_char}"
 
     def __str__(self):
+        """
+        Get a string representation of the GNSS location block.
+
+        :return: A string representation of the GNSS location block.
+        :rtype: str
+        """
         return (
             f"{self.__class__.__name__} -> time: {self.mission_time}, position: "
             f"{(self.latitude / 600000)} {(self.longitude / 600000)}, utc time: "
@@ -657,6 +909,12 @@ class GNSSLocationBlock(DataBlock):
         )
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the GNSS location block.
+
+        :return: An iterator over attribute name and value tuples.
+        :rtype: Iterator[tuple[str, Any]]
+        """
         yield "mission_time", self.mission_time
         yield "position", {"latitude": (self.latitude / 600000), "longitude": (self.longitude / 600000)}
         yield "utc_time", self.utc_time

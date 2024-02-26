@@ -15,4 +15,14 @@ data_block.py
 .. autoclass::modules.telemetry.data_block.DeploymentState
     :members: __str__
 .. autoclass::modules.telemetry.data_block.StatusDataBlock
-    :members: __init__, __len__, from_payload, to_payload, __str__, __iter__
+    :members:  __len__, from_payload, to_payload, __str__, __iter__
+.. autoclass::modules.telemetry.data_block.AltitudeDataBlock
+    :members: from_payload, to_payload, __str__, __iter__
+.. autoclass::modules.telemetry.data_block.AccelerationDataBlock
+    :members: from_payload, to_payload, __str__, __iter__
+.. autoclass::modules.telemetry.data_block.AngularVelocityDataBlock
+    :members: from_payload, to_payload, __str__, __iter__
+.. autoclass::modules.telemetry.data_block.GNSSLocationFixType
+.. autoclass::modules.telemetry.data_block.GNSSLocationBlock
+    :members: from_payload, to_payload, coord_to_str, __str__, __iter__
+
