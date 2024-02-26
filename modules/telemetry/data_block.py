@@ -252,6 +252,9 @@ class SDCardStatus(IntEnum):
 
 
 class DeploymentState(IntEnum):
+    """
+    Enumeration for deployment states.
+    """
     DEPLOYMENT_STATE_DNE = -1
     DEPLOYMENT_STATE_IDLE = 0x0
     DEPLOYMENT_STATE_ARMED = 0x1
@@ -264,6 +267,9 @@ class DeploymentState(IntEnum):
     DEPLOYMENT_STATE_RECOVERY = 0x8
 
     def __str__(self):
+        """
+        :return: a human readable sting representation of the deployment state
+        """
         return {
             DeploymentState.DEPLOYMENT_STATE_IDLE: "idle",
             DeploymentState.DEPLOYMENT_STATE_ARMED: "armed",
@@ -292,6 +298,26 @@ class StatusDataBlock(DataBlock):
         sd_blocks_recorded: int,
         sd_checkouts_missed: int,
     ):
+        """
+        Initializa a StatusDataBlock Instance.
+
+        :param mission_time: The mission time associated with the status data.
+        :type mission_time: int
+        :param kx134_state: The state of the KX134 sensor.
+        :type kx134_state: SensorStatus
+        :param alt_state: The state of the altimeter sensor.
+        :type alt_state: SensorStatus
+        :param imu_state: The state of the IMU sensor.
+        :type imu_state: SensorStatus
+        :param sd_state: The state of the SD card.
+        :type sd_state: SDCardStatus
+        :param deployment_state: The state of the deployment.
+        :type deployment_state: DeploymentState
+        :param sd_blocks_recorded: The number of SD card blocks recorded.
+        :type sd_blocks_recorded: int
+        :param sd_checkouts_missed: The number of SD card checkouts missed.
+        :type sd_checkouts_missed: int
+        """
         super().__init__(DataBlockSubtype.STATUS, mission_time)
         self.kx134_state: SensorStatus = kx134_state
         self.alt_state: SensorStatus = alt_state
@@ -302,10 +328,20 @@ class StatusDataBlock(DataBlock):
         self.sd_checkouts_missed: int = sd_checkouts_missed
 
     def __len__(self) -> int:
+        """
+        :return:         Returns the length of the StatusDataBlock
+        """
         return 16
 
     @classmethod
     def from_payload(cls, payload: bytes):
+        """
+        Deserialize a byte payload into a StatusDataBlock instance.
+
+        :param payload: The byte payload representing the status data block.
+        :type payload: bytes
+        :raises DataBlockException: If the payload is invalid.
+        """
         parts = struct.unpack("<IIII", payload)
 
         try:
@@ -338,7 +374,12 @@ class StatusDataBlock(DataBlock):
         )
 
     def to_payload(self) -> bytes:
-        """Transforms a StatusData block into a byte payload."""
+        """
+        Transforms a StatusData block into a byte payload.
+        This method convers the StatusData block into a byte payload suitable for transmission or storage.
+
+        :return: Byte representation of the StatusData block.
+        """
         kx134_state = (self.kx134_state.value & 0x7) << 16
         alt_state = (self.alt_state.value & 0x7) << 19
         imu_state = (self.imu_state.value & 0x7) << 22
@@ -350,6 +391,14 @@ class StatusDataBlock(DataBlock):
         return struct.pack("<IIII", self.mission_time, states, self.sd_blocks_recorded, self.sd_checkouts_missed)
 
     def __str__(self):
+        """
+        Return a human-readable string representation of the StatusData block.
+
+        This method returns a string containing information about the StatusData block, including its mission time,
+        sensor states, and SD card status.
+        :return: Human-readable string representation of the StatusData block.
+        :rtype: str
+        """
         return (
             f"{self.__class__.__name__} -> time: {self.mission_time} ms, kx134 state: "
             f"{str(self.kx134_state)}, altimeter state: {str(self.alt_state)}, "
@@ -359,6 +408,14 @@ class StatusDataBlock(DataBlock):
         )
 
     def __iter__(self):
+        """
+        Iterate over the attributes of the StatusData block.
+
+        This method allows iterating over the attributes of the StatusData block as key-value pairs.
+
+        :return: An iterator yielding key-value pairs of the attributes of the StatusData block.
+        :rtype: Iterator
+        """
         yield "mission_time", self.mission_time
         yield "kx134_state", self.kx134_state
         yield "altimeter_state", self.alt_state
