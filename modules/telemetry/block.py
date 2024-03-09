@@ -1,5 +1,8 @@
 # Generic block types and their subtypes
+from dataclasses import dataclass
 from enum import IntEnum
+from typing import Self
+import struct
 
 
 class BlockException(Exception):
@@ -169,3 +172,37 @@ class DiagnosticDataBlockSubtype(IntEnum):
     LOG_MESSAGE = 0x0
     OUTGOING_RADIO_PACKET = 0x1
     INCOMING_RADIO_PACKET = 0x2
+
+
+@dataclass
+class BlockHeader:
+    """Represents a header for a telemetry block."""
+
+    length: int
+    has_crypto: bool  # Has a cryptographic signature
+    message_type: int
+    message_subtype: int
+    destination: int
+
+    @classmethod
+    def from_hex(cls, payload: str) -> Self:
+        """
+        Constructs a block header object from a hex payload.
+        Returns:
+            A newly constructed block header.
+        """
+        unpacked_header: int = struct.unpack("<I", bytes.fromhex(payload))[0]
+        return cls(
+            length=((unpacked_header & 0x1F) + 1) * 4,
+            has_crypto=bool((unpacked_header >> 5) & 0x1),
+            message_type=(unpacked_header >> 6) & 0xF,
+            message_subtype=(unpacked_header >> 10) & 0x3F,
+            destination=(unpacked_header >> 16) & 0xF,
+        )
+
+    def __len__(self) -> int:
+        """
+        Returns:
+            The length of the block this header is associated with in bytes.
+        """
+        return self.length

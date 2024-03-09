@@ -1,9 +1,7 @@
-# A Python-based ground station for collecting telemetry information from the CU-InSpace rocket.
-# This data is collected using UART and is transmitted to the user interface using WebSockets.
-#
-# Authors:
-# Thomas Selwyn (Devil)
-# Matteo Golin (linguini1)
+"""
+A Python-based ground station for collecting telemetry information from the CU-InSpace rocket.
+This data is collected using UART and is transmitted to the user interface using WebSockets.
+"""
 
 import multiprocessing as mp
 from multiprocessing import Process
@@ -20,7 +18,7 @@ from modules.websocket.websocket import WebSocketHandler
 from modules.misc.cli import parser
 
 JSON: TypeAlias = dict[str, Any]
-VERSION: str = "0.5.0-DEV"
+VERSION: str = "0.5.1-DEV"
 STR_TO_LOGGING_MODE: dict[str, int] = {
     "debug": logging.DEBUG,
     "info": logging.INFO,
@@ -56,7 +54,7 @@ def main():
     serial_ws_commands: Queue[list[str]] = mp.Queue()  # type: ignore
     telemetry_ws_commands: Queue[list[str]] = mp.Queue()  # type: ignore
 
-    radio_signal_report: Queue[str] = mp.Queue()  # type: ignore
+    radio_signal_report: Queue[int] = mp.Queue()  # type: ignore
     rn2483_radio_input: Queue[str] = mp.Queue()  # type: ignore
     rn2483_radio_payloads: Queue[str] = mp.Queue()  # type: ignore
     telemetry_json_output: Queue[JSON] = mp.Queue()  # type: ignore
@@ -71,15 +69,14 @@ def main():
     # Incoming information comes directly from RN2483 LoRa radio module over serial UART
     # Outputs information in hexadecimal payload format to rn2483_radio_payloads
     serial = Process(
-        target=SerialManager,
-        args=(
+        target=SerialManager(
             serial_status,
             serial_ws_commands,
             radio_signal_report,
             rn2483_radio_input,
             rn2483_radio_payloads,
             config,
-        ),
+        ).run,
     )
     serial.start()
     logger.info(f"{'Serial':.<13} started.")
@@ -112,18 +109,17 @@ def main():
 
     while True:
         # Messages sent to main process for handling
-
-        # WS Commands
-        while not ws_commands.empty():
-            try:
-                parse_ws_command(ws_commands.get(), serial_ws_commands, telemetry_ws_commands)
-            except ShutdownException:
-                logger.info("Ground Station shutting down...")
-                serial.terminate()
-                telemetry.terminate()
-                websocket.terminate()
-                logger.info("Ground Station shutdown.")
-                exit(0)
+        try:
+            # WS Commands
+            command = ws_commands.get()
+            parse_ws_command(command, serial_ws_commands, telemetry_ws_commands)
+        except ShutdownException:
+            logger.info("Ground Station shutting down...")
+            serial.terminate()
+            telemetry.terminate()
+            websocket.terminate()
+            logger.info("Ground Station shutdown.")
+            exit(0)
 
 
 def parse_ws_command(ws_cmd: str, serial_commands: Queue[list[str]], telemetry_commands: Queue[list[str]]) -> None:
